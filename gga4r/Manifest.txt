@@ -1,0 +1,9 @@
+Rakefile
+README.txt
+CHANGELOG.txt
+Manifest.txt
+setup.rb
+lib/ga4r/version.rb
+lib/ga4r.rb
+test/test_helper.rb
+test/ga4r_test.rb
