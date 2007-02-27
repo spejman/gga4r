@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>General Genetic Algorithm for Ruby | Gga4r</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+<style>
+body {
+margin-left:20%;
+margin-right:20%;
+font-family: georgia;
+font-size: 1.5em;
+}
+
+h1 {
+	margin-left: -10%;
+	border-bottom: 5px #A02C2C solid;
+}
+
+h2 {
+	margin-left: -8%;
+	border-bottom: 3px #A02C2C dotted;
+}
+
+</style>
+</head>
+<body>
+<h1>Gga4r, General Genetic Algorithms for Ruby</h1>
+<h2>Introduction</h2>
+<p>
+General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use:
+</p>
+<ol>
+	<li>Take a class to evolve it and define fitness, recombine and mutate methods.
+<code><pre>
+	class StringPopulation < Array
+	    def fitness
+	      self.select { |pos| pos == 1 }.size.to_f / self.size.to_f
+	    end
+	
+	    def recombine(c2)
+	      cross_point = (rand * c2.size).to_i
+	      c1_a, c1_b = self.split(cross_point)
+	      c2_a, c2_b = c2.split(cross_point)
+	      [StringPopulation.new(c1_a + c2_b), StringPopulation.new(c2_a + c1_b)]
+	    end
+	
+	    def mutate
+	      mutate_point = (rand * self.size).to_i
+	      self[mutate_point] = 1
+	    end
+	end
+</pre></code>
+</li>
+<li>Create a GeneticAlgorithm object with the population.
+<code><pre>
+    def create_population_with_fit_all_1s(s_long = 10, num = 10)
+        population = []
+        num.times  do
+            chromosome = StringPopulation.new( Array.new(s_long).collect { (rand > 0.2) ? 0:1 } )
+            population << chromosome
+        end
+        population
+    end
+
+    ga = GeneticAlgorithm.new(create_population_with_fit_all_1s)
+</pre></code>	
+</li>
+<li>Call evolve method as many times as you want and see the best evolution.
+<code><pre>
+	100.times { |i|  ga.evolve }
+	p ga.best_fit[0]
+</pre></code>
+</li>
+</ol>
+
+<h2>Install</h2>
+
+<ol>
+<li>Execute:
+<code><pre>
+	gem install gga4r
+</pre></code>
+</li>
+<li>Add require in your code headers:
+<code><pre>
+	require "rubygems"
+	require "gga4r"
+</pre></code>
+</li>
+</ol>
+
+<h2>Attention</h2>
+<p>
+ Please note that Gga4r adds shuffle!, each_pair and split methods to the Array class.
+</p>
+
+<h2>Documentation</h2>
+
+<p>
+Documentation can be generated using rdoc tool under the source code with:
+<code><pre>
+  rdoc README lib
+</pre></code>
+</p>
+
+<h2>Copying</h2>
+
+<p>
+This work is developed by <a href="http://www.upf.edu/pdi/iula/sergio.espeja">Sergio Espeja</a> 
+( sergio.espeja [you_know] gmail.com ) mainly in Institut Universitari de Lingüística
+Aplicada of Universitat Pompeu Fabra ( <a
+href="http://www.iula.upf.es">www.iula.upf.es</a> ), and also in bee.com.es
+( <a href="http://bee.com.es">bee.com.es</a> ).
+
+</p>
+
+<p>
+It is free software, and may be redistributed under GPL license.
+</p>
+<h2>Support</h2>
+<p>
+Please contact me in <a
+href="http://rubyforge.org/projects/bn4r">rubyforge.org/projects/bn4r</a>.
+</p>
+
+    </div>
+
+
+   </div>
+
+</div>
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">validate XHTML</a></small></p>
+</div>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-262540-12";
+urchinTracker();
+</script>
+</body>
+</html>
+
+
+
