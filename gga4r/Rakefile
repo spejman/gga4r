@@ -9,21 +9,21 @@ require 'rake/contrib/rubyforgepublisher'
 require 'fileutils'
 require 'hoe'
 include FileUtils
-require File.join(File.dirname(__FILE__), 'lib', 'ga4r', 'version')
+require File.join(File.dirname(__FILE__), 'lib', 'gga4r', 'version')
 
-AUTHOR = "espeja"  # can also be an array of Authors
-EMAIL = "your contact email for bug fixes and info"
-DESCRIPTION = "description of gem"
-GEM_NAME = "ga4r" # what ppl will type to install your gem
-RUBYFORGE_PROJECT = "ga4r" # The unix name for your project
+AUTHOR = "Sergio Espeja"
+EMAIL = "sergio.espeja@gmail.com"
+DESCRIPTION = "A Ruby Genetic Algorithm. So simple to use: 1, take a class to evolve it and define fitness, recombine and mutate methods. 2, create a GeneticAlgorithm object with the population. 3, call evolve method as many times as you want.description of gem"
+GEM_NAME = "gga4r" # what ppl will type to install your gem
+RUBYFORGE_PROJECT = "gga4r" # The unix name for your project
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 
 
-NAME = "ga4r"
+NAME = "gga4r"
 REV = nil # UNCOMMENT IF REQUIRED: File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
-VERS = ENV['VERSION'] || (Ga4r::VERSION::STRING + (REV ? ".#{REV}" : ""))
+VERS = ENV['VERSION'] || (Gga4r::VERSION::STRING + (REV ? ".#{REV}" : ""))
                           CLEAN.include ['**/.*.sw?', '*.gem', '.config']
-RDOC_OPTS = ['--quiet', '--title', "ga4r documentation",
+RDOC_OPTS = ['--quiet', '--title', "gga4r documentation",
     "--opname", "index.html",
     "--line-numbers", 
     "--main", "README",
