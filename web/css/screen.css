@@ -1,0 +1,22 @@
+body {
+margin-left:20%;
+margin-right:20%;
+font-family: georgia;
+font-size: 1.5em;
+}
+
+h1 {
+	margin-left: -10%;
+	border-bottom: 5px #A02C2C solid;
+}
+
+h2 {
+	margin-left: -8%;
+	border-bottom: 3px #A02C2C dotted;
+}
+
+.header-links {
+    text-align: right;
+    font-size: 0.8em;
+    font-family: arial;
+}

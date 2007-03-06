@@ -3,25 +3,25 @@
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
-<title>General Genetic Algorithm for Ruby | Gga4r</title>
+<title>Algoritmos Genéticos para Ruby | Gga4r (General Genetic Algorithms for Ruby)</title>
 <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
-<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/screen.css" type="text/css" media="screen" charset="utf-8" />
 </head>
 <body>
 <div class="header-links">
-    english | <a href="es/">castellano</a>
+    <a href="/">english</a> | castellano
 </div>
-<h1>Gga4r, General Genetic Algorithms for Ruby</h1>
-<h2>Introduction</h2>
+<h1>Gga4r, Algoritmos Genéticos para Ruby</h1>
+<h2>Introducción</h2>
 <p>
-General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use:
+Gga4r es una implementación de algoritmos genéticos en Ruby fácil de usar:
 </p>
 <ol>
-	<li>Take a class to evolve it and define fitness, recombine and mutate methods.
+	<li>Coge la clase a evolucionar y defínele los métodos fitnes, recombine y mutate:
 <pre><code>
-	class StringPopulation &lt; Array
+	class StringPopulation&lt;Array
 	    def fitness
 	      self.select { |pos| pos == 1 }.size.to_f / self.size.to_f
 	    end
@@ -40,7 +40,7 @@ General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use
 	end
 </code></pre>
 </li>
-<li>Create a GeneticAlgorithm object with the population.
+<li>Crea un objeto del tipo GeneticAlgorithm con la población a evolucionar.
 <pre><code>
     def create_population_with_fit_all_1s(s_long = 10, num = 10)
         population = []
@@ -55,7 +55,7 @@ General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use
     ga = GeneticAlgorithm.new(create_population_with_fit_all_1s)
 </code></pre>	
 </li>
-<li>Call evolve method as many times as you want and see the best evolution.
+<li>Llama a la función <code>eval</code> tantas veces como quieras y observa como ha evolucionado.
 <pre><code>
 	100.times { |i|  ga.evolve }
 	p ga.best_fit[0]
@@ -63,15 +63,15 @@ General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use
 </li>
 </ol>
 
-<h2>Install</h2>
+<h2>Instalar</h2>
 
 <ol>
-<li>Execute:
+<li>Ejecutar:
 <pre><code>
 	gem install gga4r
 </code></pre>
 </li>
-<li>Add require in your code headers:
+<li>Añadir dependencias en las cabeceras:
 <pre><code>
 	require "rubygems"
 	require "gga4r"
@@ -79,33 +79,34 @@ General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use
 </li>
 </ol>
 
-<h2>Attention</h2>
+<h2>Atención!</h2>
 <p>
- Please note that Gga4r adds <code>shuffle!</code>, <code>each_pair</code> and <code>split</code> methods to the Array class.
+ Ten en cuenta que Gga4r añade los métodos <code>shuffle!</code>, <code>each_pair</code> y <code>split</code> en la clase Array.
 </p>
 
-<h2>Documentation</h2>
+<h2>Documentación</h2>
 
 <p>
-Documentation can be generated using rdoc tool under the source code with:
+La documentación se puede generar con la herramienta rdoc a partir del código fuente con el siguiente comando:
 </p>
 <pre><code>
   rdoc README lib
 </code></pre>
 
-<h2>Copying</h2>
+<h2>Créditos</h2>
 
 <p>
-This work is developed by <a href="http://www.upf.edu/pdi/iula/sergio.espeja">Sergio Espeja</a> 
-( sergio.espeja [you_know] gmail.com ) mainly in Institut Universitari de Lingüística
-Aplicada of Universitat Pompeu Fabra ( <a
-href="http://www.iula.upf.es">www.iula.upf.es</a> ) supported by <a href="http://www.upf.edu/pdi/iula/nuria.bel">Núria Bel</a>, and also in bee.com.es
-( <a href="http://bee.com.es">bee.com.es</a> ).
+Este trabajo esta desarrollado por <a href="http://www.upf.edu/pdi/iula/sergio.espeja">Sergio Espeja</a> 
+( sergio.espeja [ya_sabes_que] gmail.com ) principalmente en el Institut Universitari de Lingüística
+Aplicada of Universitat Pompeu Fabra ( <a href="http://www.iula.upf.es">www.iula.upf.es</a> ) con el soporte
+de <a href="http://www.upf.edu/pdi/iula/nuria.bel">Núria Bel</a>,
+y parte en bee.com.es ( <a href="http://bee.com.es">bee.com.es</a> ).
+
 
 </p>
 
 <p>
-It is free software, and may be redistributed under GPL license.
+Gga4r es software libre y se distribuye con la licencia GPL.
 </p>
 
 <div id="validator-badges">
