@@ -22,6 +22,7 @@ class GeneticAlgorithm
     @p_mutation = prop[:p_mutation] || 0.01
     @max_population =  prop[:max_population]
     @logger = prop[:logger] if prop[:logger]
+    @use_threads = prop[:use_threads] if prop[:use_threads]
 #    mean_fitness
   end
 
@@ -70,12 +71,13 @@ class GeneticAlgorithm
     f.write(self.generations[num_generation].to_yaml)
     f.close    
   end
+
 # EVOLUTION METHODS
 
   # Evolves the actual generation num_steps steps (1 by default).
   def evolve(num_steps = 1)
     num_steps.times do
-      @generations << evaluation(@generations[-1])
+      @generations << evaluation_with_threads(@generations[-1])
       selection!
       recombination! 
       mutation!
@@ -94,6 +96,27 @@ class GeneticAlgorithm
       chromosome
     end
   end
+
+  # Prepares given generation for evaluation ( evaluates its fitness ),
+  # using Threads
+  def evaluation_with_threads(g)
+    @logger.debug "Evaluation " + g.size.to_s + " chromosomes." if @logger
+    threads = []
+    i = 0
+    g.each do |chromosome|
+      i += 1
+      @logger.debug "Evaluating chromosome #{i}:" if @logger
+      @logger.debug "#{chromosome.stats.join("\n")}" if @logger
+      threads << Thread.new(chromosome) do |t_chromosome|
+        t_chromosome.fitness
+        puts "Thread finished #{Thread.current.id} - #{Thread.current.status}"
+      end
+    end
+    # Wait for threads for finish
+    threads.each {|thread| puts "#{thread.status}"; thread.join; puts "#{thread.status}"}
+    return g
+  end
+
   
   # Selects population to survive and recombine
   def selection(g)

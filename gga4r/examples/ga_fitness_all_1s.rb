@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/ga4r'
+require File.dirname(__FILE__) + '/../lib/gga4r'
 
 class StringPopulation < Array
     def fitness
@@ -28,7 +28,7 @@ end
     population
   end
 
-ga = GeneticAlgorithm.new(create_population_with_fit_all_1s)
+ga = GeneticAlgorithm.new(create_population_with_fit_all_1s, {:use_threads => true })
 
 100.times { |i|
   ga.evolve
