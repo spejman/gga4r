@@ -19,7 +19,7 @@
 Gga4r es una implementación de algoritmos genéticos en Ruby fácil de usar:
 </p>
 <ol>
-	<li>Coge la clase a evolucionar y defínele los métodos fitnes, recombine y mutate:
+	<li>Coge la clase a evolucionar y defínele los métodos fitness, recombine y mutate:
 <pre><code>
 	class StringPopulation&lt;Array
 	    def fitness
@@ -30,7 +30,8 @@ Gga4r es una implementación de algoritmos genéticos en Ruby fácil de usar:
 	      cross_point = (rand * c2.size).to_i
 	      c1_a, c1_b = self.split(cross_point)
 	      c2_a, c2_b = c2.split(cross_point)
-	      [StringPopulation.new(c1_a + c2_b), StringPopulation.new(c2_a + c1_b)]
+	      [StringPopulation.new(c1_a + c2_b),
+	       StringPopulation.new(c2_a + c1_b)]
 	    end
 	
 	    def mutate
@@ -93,6 +94,33 @@ La documentación se puede generar con la herramienta rdoc a partir del código 
   rdoc README lib
 </code></pre>
 
+<h2>Contribuciones</h2>
+
+<p>
+Al desarrollador de gga4r le gusta la cerveza, si la librería te ha gustado, te ha sido de utilidad o
+sencillamente quieres darle ánimos, puedes invitarle a una cerveza ;)
+</p>
+<p style="align:center;">
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="sergio.espeja@gmail.com">
+<input type="hidden" name="item_name" value="Gga4r cerveza">
+<input type="hidden" name="amount" value="2.00">
+<input type="hidden" name="no_shipping" value="0">
+<input type="hidden" name="return" value="http://gga4r.rubyforge.org/es/gracias.html">
+<input type="hidden" name="cancel_return" value="http://gga4r.rubyforge.org/es">
+<input type="hidden" name="cn" value="Comentarios">
+<input type="hidden" name="currency_code" value="EUR">
+<input type="hidden" name="tax" value="0">
+<input type="hidden" name="bn" value="PP-DonationsBF">
+<em>Cerveza 2€</em>
+<input type="image" src="https://www.paypal.com/es_ES/i/btn/x-click-but04.gif" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">
+<img alt="" border="0" src="https://www.paypal.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+</form>
+</p>
+
+
 <h2>Créditos</h2>
 
 <p>
@@ -108,6 +136,7 @@ y parte en bee.com.es ( <a href="http://bee.com.es">bee.com.es</a> ).
 <p>
 Gga4r es software libre y se distribuye con la licencia GPL.
 </p>
+
 
 <div id="validator-badges">
   <p><small><a href="http://validator.w3.org/check/referer">validate XHTML</a></small></p>

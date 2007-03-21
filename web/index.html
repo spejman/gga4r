@@ -30,7 +30,8 @@ General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use
 	      cross_point = (rand * c2.size).to_i
 	      c1_a, c1_b = self.split(cross_point)
 	      c2_a, c2_b = c2.split(cross_point)
-	      [StringPopulation.new(c1_a + c2_b), StringPopulation.new(c2_a + c1_b)]
+	      [StringPopulation.new(c1_a + c2_b),
+	       StringPopulation.new(c2_a + c1_b)]
 	    end
 	
 	    def mutate
@@ -92,6 +93,32 @@ Documentation can be generated using rdoc tool under the source code with:
 <pre><code>
   rdoc README lib
 </code></pre>
+
+<h2>Contributing</h2>
+
+<p>
+gga4r developer loves beer, if this library has been useful for you or you want
+to support it, invite him a beer!
+</p>
+<p style="align:center;">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="sergio.espeja@gmail.com">
+<input type="hidden" name="item_name" value="Gga4r beer">
+<input type="hidden" name="amount" value="2.00">
+<input type="hidden" name="no_shipping" value="0">
+<input type="hidden" name="return" value="http://gga4r.rubyforge.org/thanks.html">
+<input type="hidden" name="cn" value="Comments">
+<input type="hidden" name="no_note" value="1">
+<input type="hidden" name="currency_code" value="EUR">
+<input type="hidden" name="tax" value="0">
+<input type="hidden" name="bn" value="PP-DonationsBF">
+<em>Beer 2€</em>
+<input type="image" src="http://gga4r.rubyforge.org/img/donate.gif" border="0" name="submit" alt="Realice pagos con PayPal: es rápido, gratis y seguro.">
+<img alt="" border="0" src="https://www.paypal.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+</form>
+</p>
+
 
 <h2>Copying</h2>
 

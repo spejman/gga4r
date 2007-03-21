@@ -20,3 +20,12 @@ h2 {
     font-size: 0.8em;
     font-family: arial;
 }
+
+code {
+    font-size: 0.7em;
+}
+pre {
+    background-color: #ffc;
+    padding-bottom: 15px;
+    border: 1px #888 solid;
+}
