@@ -28,8 +28,8 @@ Gga4r es una implementación de algoritmos genéticos en Ruby fácil de usar:
 	
 	    def recombine(c2)
 	      cross_point = (rand * c2.size).to_i
-	      c1_a, c1_b = self.split(cross_point)
-	      c2_a, c2_b = c2.split(cross_point)
+	      c1_a, c1_b = self.separate(cross_point)
+	      c2_a, c2_b = c2.separate(cross_point)
 	      [StringPopulation.new(c1_a + c2_b),
 	       StringPopulation.new(c2_a + c1_b)]
 	    end
@@ -82,7 +82,7 @@ Gga4r es una implementación de algoritmos genéticos en Ruby fácil de usar:
 
 <h2>Atención!</h2>
 <p>
- Ten en cuenta que Gga4r añade los métodos <code>shuffle!</code>, <code>each_pair</code> y <code>split</code> en la clase Array.
+ Ten en cuenta que Gga4r añade los métodos <code>shuffle!</code>, <code>each_pair</code> y <code>separate</code> en la clase Array.
 </p>
 
 <h2>Documentación</h2>

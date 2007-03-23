@@ -28,8 +28,8 @@ General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use
 	
 	    def recombine(c2)
 	      cross_point = (rand * c2.size).to_i
-	      c1_a, c1_b = self.split(cross_point)
-	      c2_a, c2_b = c2.split(cross_point)
+	      c1_a, c1_b = self.separate(cross_point)
+	      c2_a, c2_b = c2.separate(cross_point)
 	      [StringPopulation.new(c1_a + c2_b),
 	       StringPopulation.new(c2_a + c1_b)]
 	    end
@@ -82,7 +82,7 @@ General Genetic Algorithms for Ruby is a Ruby Genetic Algorithm so simple to use
 
 <h2>Attention</h2>
 <p>
- Please note that Gga4r adds <code>shuffle!</code>, <code>each_pair</code> and <code>split</code> methods to the Array class.
+ Please note that Gga4r adds <code>shuffle!</code>, <code>each_pair</code> and <code>separate</code> methods to the Array class.
 </p>
 
 <h2>Documentation</h2>

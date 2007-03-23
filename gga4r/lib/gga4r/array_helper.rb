@@ -28,7 +28,7 @@ class Array
   # 0 to "position" and second from position "position+1" to
   # last position.
   # Returns two new arrays.
-  def split(position)
+  def separate(position)
    return self[0..position], self[position+1..-1]
   end
   
