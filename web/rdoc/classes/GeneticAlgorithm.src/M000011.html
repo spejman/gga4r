@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>recombination (GeneticAlgorithm)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 111</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">recombination</span>(<span class="ruby-identifier">g</span>)
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Recombination &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; chromosomes.&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+    <span class="ruby-identifier">new_generation</span> = <span class="ruby-identifier">g</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">shuffle!</span>
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Shuffled!&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+    <span class="ruby-identifier">new_childs</span> = []
+    <span class="ruby-identifier">new_generation</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">chromosome1</span>, <span class="ruby-identifier">chromosome2</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rand</span> <span class="ruby-operator">&gt;</span> (<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@p_combination</span>)
+        <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Recombining&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+        <span class="ruby-identifier">new_childs</span> = <span class="ruby-identifier">chromosome1</span>.<span class="ruby-identifier">recombine</span>(<span class="ruby-identifier">chromosome2</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">new_generation</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">new_childs</span>    
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

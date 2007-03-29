@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>evolve (GeneticAlgorithm)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 78</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">evolve</span>(<span class="ruby-identifier">num_steps</span> = <span class="ruby-value">1</span>)
+    <span class="ruby-identifier">num_steps</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-ivar">@generations</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">evaluation</span>(<span class="ruby-ivar">@generations</span>[<span class="ruby-value">-1</span>])
+      <span class="ruby-identifier">selection!</span>
+      <span class="ruby-identifier">recombination!</span> 
+      <span class="ruby-identifier">mutation!</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

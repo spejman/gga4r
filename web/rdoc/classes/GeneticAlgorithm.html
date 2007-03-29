@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: GeneticAlgorithm</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />GeneticAlgorithm</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/lib/gga4r/gga4r_main_rb.html">lib/gga4r/gga4r_main.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+Object
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000003">best_fit</a></li>
+  <li><a href="#M000008">evaluation</a></li>
+  <li><a href="#M000007">evolve</a></li>
+  <li><a href="#M000004">mean_fitness</a></li>
+  <li><a href="#M000013">mutation</a></li>
+  <li><a href="#M000014">mutation!</a></li>
+  <li><a href="#M000001">new</a></li>
+  <li><a href="#M000002">num_generations</a></li>
+  <li><a href="#M000005">populate_from_files</a></li>
+  <li><a href="#M000011">recombination</a></li>
+  <li><a href="#M000012">recombination!</a></li>
+  <li><a href="#M000015">remainder_stochastic_sampling</a></li>
+  <li><a href="#M000006">save_generation</a></li>
+  <li><a href="#M000009">selection</a></li>
+  <li><a href="#M000010">selection!</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>generations</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>p_combination</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>p_mutation</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000001"></a><b>new</b>(in_pop, prop = {})
+  </div>
+  <div class="description">
+  <p>
+Must be initialized with a <a href="Array.html">Array</a> of chromosomes To
+be a chomosome the object must implement the next methods:
+</p>
+<pre>
+ - fitness
+ - recombine
+ - mutate
+ Accepts the next properties:
+  - extra_generations: adds given array of generations to the GeneticAlgorithm's own array of generations.
+  - p_combination: probability of combiantion ( by default 0.2 )
+  - p_mutation: probability of mutation ( by default 0.01 )
+  - max_population: maximum number of individuals that are allowed to form a generation.
+  - logger: logger to write messages if given.
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000001_source')" id="l_M000001_source">show source</a> ]</p>
+  <div id="M000001_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 18</span>
+18:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">in_pop</span>, <span class="ruby-identifier">prop</span> = {})    
+19:     <span class="ruby-ivar">@generations</span> = [<span class="ruby-identifier">in_pop</span>]
+20:     <span class="ruby-ivar">@generations</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">prop</span>[<span class="ruby-identifier">:extra_generations</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prop</span>[<span class="ruby-identifier">:extra_generations</span>]
+21:     <span class="ruby-ivar">@p_combination</span> = <span class="ruby-identifier">prop</span>[<span class="ruby-identifier">:p_combination</span>] <span class="ruby-operator">||</span> <span class="ruby-value">0</span><span class="ruby-value">.2</span>
+22:     <span class="ruby-ivar">@p_mutation</span> = <span class="ruby-identifier">prop</span>[<span class="ruby-identifier">:p_mutation</span>] <span class="ruby-operator">||</span> <span class="ruby-value">0</span><span class="ruby-value">.01</span>
+23:     <span class="ruby-ivar">@max_population</span> =  <span class="ruby-identifier">prop</span>[<span class="ruby-identifier">:max_population</span>]
+24:     <span class="ruby-ivar">@logger</span> = <span class="ruby-identifier">prop</span>[<span class="ruby-identifier">:logger</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prop</span>[<span class="ruby-identifier">:logger</span>]
+25: 
+26: <span class="ruby-comment cmt">#    mean_fitness</span>
+27:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000005"></a><b>populate_from_files</b>(a_filenames, prop = {})
+  </div>
+  <div class="description">
+  <p>
+Returns a <a href="GeneticAlgorithm.html">GeneticAlgorithm</a> object with
+the generations loaded from given files and with properties prop. Files
+must contain the chromosomes in YAML format.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000005_source')" id="l_M000005_source">show source</a> ]</p>
+  <div id="M000005_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 59</span>
+59:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">populate_from_files</span>(<span class="ruby-identifier">a_filenames</span>, <span class="ruby-identifier">prop</span> = {})
+60:     <span class="ruby-identifier">a_filenames</span> = [<span class="ruby-identifier">a_filenames</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">a_filenames</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>
+61:     
+62:     <span class="ruby-identifier">loaded_generations</span> = <span class="ruby-identifier">a_filenames</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">filename</span><span class="ruby-operator">|</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-value str">&quot;r&quot;</span>)) }
+63:     <span class="ruby-identifier">prop</span>[<span class="ruby-identifier">:extra_generations</span>] = <span class="ruby-identifier">loaded_generations</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">loaded_generations</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+64:     <span class="ruby-keyword kw">return</span> <span class="ruby-constant">GeneticAlgorithm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">loaded_generations</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">prop</span>)
+65:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000003"></a><b>best_fit</b>(num_generation = -1)
+  </div>
+  <div class="description">
+  <p>
+Returns an array with the best fitted individuals for given generation
+number ( by default from last generation ).
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000003_source')" id="l_M000003_source">show source</a> ]</p>
+  <div id="M000003_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 39</span>
+39:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">best_fit</span>(<span class="ruby-identifier">num_generation</span> = <span class="ruby-value">-1</span>)
+40:     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Generation not generated still num generations = #{num_generations}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">num_generation</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">num_generations</span>  
+41:     <span class="ruby-identifier">generation</span> = <span class="ruby-ivar">@generations</span>[<span class="ruby-identifier">num_generation</span>]
+42:     <span class="ruby-identifier">max_fitness</span> = <span class="ruby-identifier">generation</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">chromosome</span><span class="ruby-operator">|</span> <span class="ruby-identifier">chromosome</span>.<span class="ruby-identifier">fitness</span> }.<span class="ruby-identifier">max</span>
+43:     <span class="ruby-identifier">generation</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">chromosome</span><span class="ruby-operator">|</span> <span class="ruby-identifier">chromosome</span>.<span class="ruby-identifier">fitness</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">max_fitness</span> }
+44:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000008"></a><b>evaluation</b>(g)
+  </div>
+  <div class="description">
+  <p>
+Prepares given generation for evaluation ( evaluates its fitness ).
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000008_source')" id="l_M000008_source">show source</a> ]</p>
+  <div id="M000008_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 88</span>
+88:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">evaluation</span>(<span class="ruby-identifier">g</span>)
+89:     <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Evaluation &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; chromosomes.&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+90:     <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+91:     <span class="ruby-identifier">g</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">chromosome</span><span class="ruby-operator">|</span>
+92:       <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+93:       <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Evaluating chromosome #{i}:&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+94:       <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;#{chromosome.stats.join(&quot;\n&quot;)}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+95:       <span class="ruby-identifier">chromosome</span>.<span class="ruby-identifier">fitness</span>
+96:       <span class="ruby-identifier">chromosome</span>
+97:     <span class="ruby-keyword kw">end</span>
+98:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000007"></a><b>evolve</b>(num_steps = 1)
+  </div>
+  <div class="description">
+  <p>
+Evolves the actual generation num_steps steps (1 by default).
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000007_source')" id="l_M000007_source">show source</a> ]</p>
+  <div id="M000007_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 78</span>
+78:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">evolve</span>(<span class="ruby-identifier">num_steps</span> = <span class="ruby-value">1</span>)
+79:     <span class="ruby-identifier">num_steps</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+80:       <span class="ruby-ivar">@generations</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">evaluation</span>(<span class="ruby-ivar">@generations</span>[<span class="ruby-value">-1</span>])
+81:       <span class="ruby-identifier">selection!</span>
+82:       <span class="ruby-identifier">recombination!</span> 
+83:       <span class="ruby-identifier">mutation!</span>
+84:     <span class="ruby-keyword kw">end</span>
+85:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000004"></a><b>mean_fitness</b>(num = -1)
+  </div>
+  <div class="description">
+  <p>
+Returns the mean of the fitness for given generation number ( by default
+from last generation ).
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000004_source')" id="l_M000004_source">show source</a> ]</p>
+  <div id="M000004_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 48</span>
+48:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mean_fitness</span>(<span class="ruby-identifier">num</span> = <span class="ruby-value">-1</span>)
+49:     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Generation not generated still num generations = #{num_generations}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">num</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">num_generations</span>
+50:     <span class="ruby-identifier">num</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">num_generations</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">num</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+51:     <span class="ruby-identifier">sum_fitness</span> = <span class="ruby-value">0</span>
+52:     <span class="ruby-ivar">@generations</span>[<span class="ruby-identifier">num</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">chromosome</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sum_fitness</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">chromosome</span>.<span class="ruby-identifier">fitness</span> }
+53:     <span class="ruby-identifier">sum_fitness</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@generations</span>[<span class="ruby-identifier">num</span>].<span class="ruby-identifier">size</span>.<span class="ruby-identifier">to_f</span>
+54:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000013"></a><b>mutation</b>(g)
+  </div>
+  <div class="description">
+  <p>
+Mutates population
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000013_source')" id="l_M000013_source">show source</a> ]</p>
+  <div id="M000013_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 128</span>
+128:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mutation</span>(<span class="ruby-identifier">g</span>)
+129:     <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Mutation &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; chromosomes.&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>  
+130:     <span class="ruby-identifier">new_generation</span> = <span class="ruby-identifier">g</span>.<span class="ruby-identifier">dup</span>
+131:     <span class="ruby-identifier">new_generation</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">chromosome</span><span class="ruby-operator">|</span>
+132:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rand</span> <span class="ruby-operator">&gt;</span> (<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@p_mutation</span>)
+133:         <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Mutate&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+134:         <span class="ruby-identifier">chromosome</span>.<span class="ruby-identifier">mutate</span> 
+135:       <span class="ruby-keyword kw">end</span>
+136:     <span class="ruby-keyword kw">end</span>
+137:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000014"></a><b>mutation!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000014_source')" id="l_M000014_source">show source</a> ]</p>
+  <div id="M000014_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 138</span>
+138:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mutation!</span>; <span class="ruby-ivar">@generations</span>[<span class="ruby-value">-1</span>] = <span class="ruby-identifier">mutation</span>(<span class="ruby-ivar">@generations</span>[<span class="ruby-value">-1</span>]); <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000002"></a><b>num_generations</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns the number of generations that are in the <a
+href="GeneticAlgorithm.html">GeneticAlgorithm</a> object.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000002_source')" id="l_M000002_source">show source</a> ]</p>
+  <div id="M000002_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 33</span>
+33:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">num_generations</span>
+34:     <span class="ruby-ivar">@generations</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+35:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000011"></a><b>recombination</b>(g)
+  </div>
+  <div class="description">
+  <p>
+Recombines population
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000011_source')" id="l_M000011_source">show source</a> ]</p>
+  <div id="M000011_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 111</span>
+111:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">recombination</span>(<span class="ruby-identifier">g</span>)
+112:     <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Recombination &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; chromosomes.&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+113:     <span class="ruby-identifier">new_generation</span> = <span class="ruby-identifier">g</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">shuffle!</span>
+114:     <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Shuffled!&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+115:     <span class="ruby-identifier">new_childs</span> = []
+116:     <span class="ruby-identifier">new_generation</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">chromosome1</span>, <span class="ruby-identifier">chromosome2</span><span class="ruby-operator">|</span>
+117:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rand</span> <span class="ruby-operator">&gt;</span> (<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@p_combination</span>)
+118:         <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Recombining&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span>
+119:         <span class="ruby-identifier">new_childs</span> = <span class="ruby-identifier">chromosome1</span>.<span class="ruby-identifier">recombine</span>(<span class="ruby-identifier">chromosome2</span>)
+120:       <span class="ruby-keyword kw">end</span>
+121:     <span class="ruby-keyword kw">end</span>
+122:     <span class="ruby-identifier">new_generation</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">new_childs</span>    
+123:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000012"></a><b>recombination!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000012_source')" id="l_M000012_source">show source</a> ]</p>
+  <div id="M000012_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 125</span>
+125:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">recombination!</span>; <span class="ruby-ivar">@generations</span>[<span class="ruby-value">-1</span>] = <span class="ruby-identifier">recombination</span>(<span class="ruby-ivar">@generations</span>[<span class="ruby-value">-1</span>]); <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000015"></a><b>remainder_stochastic_sampling</b>(g)
+  </div>
+  <div class="description">
+  <p>
+Remainder Stochastic Sampling algorithm for selection.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000015_source')" id="l_M000015_source">show source</a> ]</p>
+  <div id="M000015_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 141</span>
+141:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remainder_stochastic_sampling</span>(<span class="ruby-identifier">g</span>)
+142:     <span class="ruby-identifier">new_generation</span> = []
+143:     <span class="ruby-identifier">g</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">chromosome</span><span class="ruby-operator">|</span>
+144:       <span class="ruby-identifier">num_rep</span> = <span class="ruby-value">0</span>
+145:       <span class="ruby-identifier">num_rep</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">chromosome</span>.<span class="ruby-identifier">fitness</span><span class="ruby-operator">/</span><span class="ruby-identifier">mean_fitness</span>).<span class="ruby-identifier">to_i</span>
+146:       <span class="ruby-identifier">num_rep</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rand</span> <span class="ruby-operator">&gt;</span> (<span class="ruby-value">1</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">chromosome</span>.<span class="ruby-identifier">fitness</span><span class="ruby-operator">/</span><span class="ruby-identifier">mean_fitness</span>)<span class="ruby-operator">%</span><span class="ruby-value">1</span>)
+147:       <span class="ruby-identifier">new_generation</span> = <span class="ruby-identifier">new_generation</span> <span class="ruby-operator">+</span> ([<span class="ruby-identifier">chromosome</span>] <span class="ruby-operator">*</span> <span class="ruby-identifier">num_rep</span>)
+148:     <span class="ruby-keyword kw">end</span>
+149:     <span class="ruby-identifier">new_generation</span>
+150:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000006"></a><b>save_generation</b>(filename, num_generation = -1)
+  </div>
+  <div class="description">
+  <p>
+Saves into filename and in yaml format the generation that matchs with
+given generation number ( by default from last generation ).
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000006_source')" id="l_M000006_source">show source</a> ]</p>
+  <div id="M000006_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 69</span>
+69:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_generation</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">num_generation</span> = <span class="ruby-value">-1</span>)
+70:     <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-value str">&quot;w&quot;</span>)
+71:     <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">generations</span>[<span class="ruby-identifier">num_generation</span>].<span class="ruby-identifier">to_yaml</span>)
+72:     <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>    
+73:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000009"></a><b>selection</b>(g)
+  </div>
+  <div class="description">
+  <p>
+Selects population to survive and recombine
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000009_source')" id="l_M000009_source">show source</a> ]</p>
+  <div id="M000009_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 103</span>
+103:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">selection</span>(<span class="ruby-identifier">g</span>)
+104:     <span class="ruby-identifier">g_tmp</span> = <span class="ruby-identifier">remainder_stochastic_sampling</span>(<span class="ruby-identifier">g</span>)
+105:     <span class="ruby-identifier">g_tmp</span> = <span class="ruby-identifier">g_tmp</span>.<span class="ruby-identifier">sort_by</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-operator">-</span><span class="ruby-identifier">i</span>.<span class="ruby-identifier">fitness</span> }[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-ivar">@max_population</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)] <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@max_population</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">g_tmp</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@max_population</span>)
+106:     <span class="ruby-identifier">g_tmp</span>
+107:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000010"></a><b>selection!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000010_source')" id="l_M000010_source">show source</a> ]</p>
+  <div id="M000010_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/gga4r/gga4r_main.rb, line 108</span>
+108:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">selection!</span>; <span class="ruby-ivar">@generations</span>[<span class="ruby-value">-1</span>] = <span class="ruby-identifier">selection</span>(<span class="ruby-ivar">@generations</span>[<span class="ruby-value">-1</span>]); <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

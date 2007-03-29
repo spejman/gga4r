@@ -56,7 +56,7 @@ Gga4r es una implementación de algoritmos genéticos en Ruby fácil de usar:
     ga = GeneticAlgorithm.new(create_population_with_fit_all_1s)
 </code></pre>	
 </li>
-<li>Llama a la función <code>eval</code> tantas veces como quieras y observa como ha evolucionado.
+<li>Llama a la función <code>evolve</code> tantas veces como quieras y observa como ha evolucionado.
 <pre><code>
 	100.times { |i|  ga.evolve }
 	p ga.best_fit[0]
@@ -88,7 +88,7 @@ Gga4r es una implementación de algoritmos genéticos en Ruby fácil de usar:
 <h2>Documentación</h2>
 
 <p>
-La documentación se puede generar con la herramienta rdoc a partir del código fuente con el siguiente comando:
+La documentación se puede leer online en <a href="/rdoc">gga4r rdoc</a> o generar con la herramienta rdoc a partir del código fuente con el siguiente comando:
 </p>
 <pre><code>
   rdoc README lib

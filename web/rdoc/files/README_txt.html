@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>File: README.txt</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table border='0' cellpadding='0' cellspacing='0' width="100%" class='banner'>
+  <tr><td>
+    <table width="100%" border='0' cellpadding='0' cellspacing='0'><tr>
+      <td class="file-title" colspan="2"><span class="file-title-prefix">File</span><br />README.txt</td>
+      <td align="right">
+        <table border='0' cellspacing="0" cellpadding="2">
+          <tr>
+            <td>Path:</td>
+            <td>README.txt
+            </td>
+          </tr>
+          <tr>
+            <td>Modified:</td>
+            <td>Thu Mar 29 10:09:12 CEST 2007</td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+  </td></tr>
+</table><br>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><h1>README for gga4r</h1>
+<h2>Introduction</h2>
+<p>
+General Genetic Algorithm for ruby is a Ruby Genetic Algorithm so simple to
+use:
+</p>
+<pre>
+        1) Take a class to evolve it and define fitness, recombine and mutate methods.
+                        class StringPopulation &lt; Array
+                            def fitness
+                              self.select { |pos| pos == 1 }.size.to_f / self.size.to_f
+                            end
+
+                            def recombine(c2)
+                              cross_point = (rand * c2.size).to_i
+                              c1_a, c1_b = self.separate(cross_point)
+                              c2_a, c2_b = c2.separate(cross_point)
+                              [StringPopulation.new(c1_a + c2_b), StringPopulation.new(c2_a + c1_b)]
+                            end
+
+                            def mutate
+                              mutate_point = (rand * self.size).to_i
+                              self[mutate_point] = 1
+                            end
+                        end
+
+        2) Create a GeneticAlgorithm object with the population.
+                        def create_population_with_fit_all_1s(s_long = 10, num = 10)
+                            population = []
+                            num.times  do
+                              chromosome = StringPopulation.new(Array.new(s_long).collect { (rand &gt; 0.2) ? 0:1 })
+                              population &lt;&lt; chromosome
+                            end
+                            population
+                        end
+
+                        ga = GeneticAlgorithm.new(create_population_with_fit_all_1s)
+
+        3) Call evolve method as many times as you want and see the best evolution.
+                        100.times { |i|  ga.evolve }
+                        p ga.best_fit[0]
+</pre>
+<h2>Install</h2>
+<p>
+1) Execute:
+</p>
+<pre>
+        gem install gga4r
+</pre>
+<p>
+2) Add require in your code headers:
+</p>
+<pre>
+        require &quot;rubygems&quot;
+        require &quot;gga4r&quot;
+</pre>
+<h2>Attention</h2>
+<pre>
+ Please note that Gga4r adds shuffle!, each_pair and separate methods to the Array class.
+</pre>
+<h2>Documentation</h2>
+<p>
+Documentation can be generated using rdoc tool under the source code with:
+</p>
+<pre>
+  rdoc README lib
+</pre>
+<h2>Copying</h2>
+<p>
+This work is developed by Sergio Espeja ( <a
+href="http://www.upf.edu/pdi/iula/sergio.espeja">www.upf.edu/pdi/iula/sergio.espeja</a>,
+sergio.espeja at gmail.com ) mainly in Institut Universitari de
+Lingüística Aplicada of Universitat Pompeu Fabra ( <a
+href="http://www.iula.upf.es">www.iula.upf.es</a> ), and also in bee.com.es
+( bee.com.es ).
+</p>
+<p>
+It is free software, and may be redistributed under GPL license.
+</p>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+  </div>
+
+    </body>
+</html>
