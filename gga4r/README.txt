@@ -1,8 +1,8 @@
-README for gga4r
-===============
+=README for gga4r
 
-Introduction
-************
+
+==Introduction
+
 General Genetic Algorithm for ruby is a Ruby Genetic Algorithm so simple to use:
 
 	1) Take a class to evolve it and define fitness, recombine and mutate methods.
@@ -13,8 +13,8 @@ General Genetic Algorithm for ruby is a Ruby Genetic Algorithm so simple to use:
 			
 			    def recombine(c2)
 			      cross_point = (rand * c2.size).to_i
-			      c1_a, c1_b = self.split(cross_point)
-			      c2_a, c2_b = c2.split(cross_point)
+			      c1_a, c1_b = self.separate(cross_point)
+			      c2_a, c2_b = c2.separate(cross_point)
 			      [StringPopulation.new(c1_a + c2_b), StringPopulation.new(c2_a + c1_b)]
 			    end
 			
@@ -40,8 +40,7 @@ General Genetic Algorithm for ruby is a Ruby Genetic Algorithm so simple to use:
 			100.times { |i|  ga.evolve }
 			p ga.best_fit[0]
 
-Install
-*******
+==Install
 
 1) Execute:
 	gem install gga4r
@@ -51,20 +50,18 @@ Install
 	require "gga4r"
 
 
-Attention
-*********
- Please note that Gga4r adds shuffle!, each_pair and split methods to the Array class.
+==Attention
 
-Documentation
-*************
+ Please note that Gga4r adds shuffle!, each_pair and separate methods to the Array class.
+
+==Documentation
 
 Documentation can be generated using rdoc tool under the source code with:
 
   rdoc README lib
 
 
-Copying
-*******
+==Copying
 
 This work is developed by Sergio Espeja ( www.upf.edu/pdi/iula/sergio.espeja, sergio.espeja at gmail.com )
 mainly in Institut Universitari de Lingüística Aplicada of Universitat Pompeu Fabra ( www.iula.upf.es ),
