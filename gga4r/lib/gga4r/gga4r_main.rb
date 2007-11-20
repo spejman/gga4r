@@ -135,7 +135,7 @@ class GeneticAlgorithm
     new_generation.each_pair do |chromosome1, chromosome2|
       if rand > (1 - @p_combination)
         @logger.debug "Recombining" if @logger
-        new_childs = chromosome1.recombine(chromosome2)
+        new_childs << chromosome1.recombine(chromosome2)
       end
     end
     new_generation + new_childs    
@@ -161,8 +161,10 @@ class GeneticAlgorithm
     new_generation = []
     g.each do |chromosome|
       num_rep = 0
-      num_rep += (chromosome.fitness/mean_fitness).to_i
-      num_rep += 1 if rand > (1 - (chromosome.fitness/mean_fitness)%1)
+      if chromosome.fitness > 0
+        num_rep += (chromosome.fitness.to_f/mean_fitness).to_i 
+        num_rep += 1 if rand > (1 - (chromosome.fitness/mean_fitness)%1)
+      end
       new_generation = new_generation + ([chromosome] * num_rep)
     end
     new_generation
