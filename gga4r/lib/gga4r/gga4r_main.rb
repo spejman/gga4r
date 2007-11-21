@@ -162,7 +162,7 @@ class GeneticAlgorithm
     g.each do |chromosome|
       num_rep = 0
       if chromosome.fitness > 0
-        num_rep += (chromosome.fitness.to_f/mean_fitness).to_i 
+        num_rep += (chromosome.fitness.to_f/mean_fitness).to_i
         num_rep += 1 if rand > (1 - (chromosome.fitness/mean_fitness)%1)
       end
       new_generation = new_generation + ([chromosome] * num_rep)
