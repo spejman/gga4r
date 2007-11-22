@@ -1,5 +1,6 @@
 require "yaml"
 require "logger"
+require "active_support"
 
 class GeneticAlgorithm
   attr_reader :generations, :p_combination, :p_mutation
@@ -132,10 +133,10 @@ class GeneticAlgorithm
     new_generation = g.dup.shuffle!
     @logger.debug "Shuffled!" if @logger
     new_childs = []
-    new_generation.each_pair do |chromosome1, chromosome2|
+    new_generation.in_groups_of(2) do |chromosome1, chromosome2|
       if rand > (1 - @p_combination)
         @logger.debug "Recombining" if @logger
-        new_childs << chromosome1.recombine(chromosome2)
+        new_childs += chromosome1.recombine(chromosome2)
       end
     end
     new_generation + new_childs    
