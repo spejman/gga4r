@@ -134,6 +134,7 @@ class GeneticAlgorithm
     @logger.debug "Shuffled!" if @logger
     new_childs = []
     new_generation.in_groups_of(2) do |chromosome1, chromosome2|
+      next if chromosome2.nil?
       if rand > (1 - @p_combination)
         @logger.debug "Recombining" if @logger
         new_childs += chromosome1.recombine(chromosome2)
