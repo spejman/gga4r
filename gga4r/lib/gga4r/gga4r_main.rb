@@ -1,5 +1,6 @@
 require "yaml"
 require "logger"
+require "rubygems"
 require "active_support"
 
 class GeneticAlgorithm
