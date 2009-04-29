@@ -111,11 +111,15 @@ class GeneticAlgorithm
       @logger.debug "#{chromosome.stats.join("\n")}" if @logger
       threads << Thread.new(chromosome) do |t_chromosome|
         t_chromosome.fitness
-        puts "Thread finished #{Thread.current.id} - #{Thread.current.status}"
+        @logger.debug "Thread finished #{Thread.current.object_id} - #{Thread.current.status}" if @logger
       end
     end
     # Wait for threads for finish
-    threads.each {|thread| puts "#{thread.status}"; thread.join; puts "#{thread.status}"}
+		threads.each do |thread|
+			@logger.debug "#{thread.status}" if @logger
+			thread.join
+			@logger.debug "#{thread.status}" if @logger
+		end
     return g
   end
 
@@ -133,15 +137,15 @@ class GeneticAlgorithm
     @logger.debug "Recombination " + g.size.to_s + " chromosomes." if @logger
     new_generation = g.dup.shuffle!
     @logger.debug "Shuffled!" if @logger
-    new_childs = []
+    new_children = []
     new_generation.in_groups_of(2) do |chromosome1, chromosome2|
       next if chromosome2.nil?
       if rand > (1 - @p_combination)
         @logger.debug "Recombining" if @logger
-        new_childs += chromosome1.recombine(chromosome2)
+        new_children << chromosome1.recombine(chromosome2)
       end
     end
-    new_generation + new_childs    
+    new_generation + new_children    
   end
 
   def recombination!; @generations[-1] = recombination(@generations[-1]); end

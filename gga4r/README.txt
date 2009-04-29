@@ -3,7 +3,7 @@
 
 ==Introduction
 
-General Genetic Algorithm for ruby is a Ruby Genetic Algorithm so simple to use:
+General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simple to use:
 
 	1) Take a class to evolve it and define fitness, recombine and mutate methods.
 			class StringPopulation < Array
@@ -36,7 +36,7 @@ General Genetic Algorithm for ruby is a Ruby Genetic Algorithm so simple to use:
 		
 			ga = GeneticAlgorithm.new(create_population_with_fit_all_1s)
 	
-	3) Call evolve method as many times as you want and see the best evolution.
+	3) Call the evolve method as many times as you want and see the best evolution.
 			100.times { |i|  ga.evolve }
 			p ga.best_fit[0]
 

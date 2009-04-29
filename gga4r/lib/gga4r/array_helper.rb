@@ -1,12 +1,16 @@
 class Array
   
   # Shuffles the array modifying its order.
+  def shuffle
+    sort_by { Kernel.rand }
+  end
+	
+  # Returns a shuffled copy of the array.
   def shuffle!
-    size.downto(1) { |n| push delete_at(rand(n)) }
-    self
+    self.replace shuffle
   end
   
-  # Yeilds given bloc using arrays items pair by pair.
+  # Yields given bloc using arrays items pair by pair.
   # e.g.
   # <code>
   # ["a","b","c","d"].each_pair do |first, second|
