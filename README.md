@@ -1,12 +1,13 @@
-=README for gga4r
+#README for gga4r
 
 
-==Introduction
+##Introduction
 
 General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simple to use:
 
-1. Take a class to evolve it and define fitness, recombine and mutate methods.
+1) Take a class to evolve it and define fitness, recombine and mutate methods.
 
+```ruby
 class StringPopulation < Array
   def fitness
     self.select { |pos| pos == 1 }.size.to_f / self.size.to_f
@@ -24,10 +25,11 @@ class StringPopulation < Array
     self[mutate_point] = 1
   end
 end
+```
 
+2) Create a GeneticAlgorithm object with the population.
 
-2. Create a GeneticAlgorithm object with the population.
-
+```ruby
 def create_population_with_fit_all_1s(s_long = 10, num = 10)
     population = []
     num.times  do
@@ -38,40 +40,47 @@ def create_population_with_fit_all_1s(s_long = 10, num = 10)
 end
 
 ga = GeneticAlgorithm.new(create_population_with_fit_all_1s)
+```
 
-3. Call the evolve method as many times as you want and see the best evolution.
+3) Call the evolve method as many times as you want and see the best evolution.
 
+```ruby
 100.times { |i|  ga.evolve }
 p ga.best_fit[0]
+```
 
-==Install
+##Install
 
-1) Execute:
-	gem install gga4r
+1. Execute:
+```
+gem install gga4r
+```
 
-2) Add require in your code headers:
-	require "rubygems"
-	require "gga4r"
+2. Add require in your code headers:
+```
+require "rubygems"
+require "gga4r"
+```
 
+##Attention
 
-==Attention
+Please note that Gga4r adds shuffle, shuffle!, each_pair and separate methods to the Array class.
 
- Please note that Gga4r adds shuffle, shuffle!, each_pair and separate methods to the Array class.
-
-==Documentation
+##Documentation
 
 Documentation can be generated using rdoc tool under the source code with:
+```
+rdoc README lib
+```
 
-  rdoc README lib
-
-==Contributors
+##Contributors
 
 - Ben Prew https://github.com/benprew
 - Rory O'Kane
 - Sergio Espeja https://github.com/spejman
 
 
-==Copying
+##Copying
 
 This work is developed by Sergio Espeja ( www.upf.edu/pdi/iula/sergio.espeja, sergio.espeja at gmail.com )
 mainly in Institut Universitari de Lingüística Aplicada of Universitat Pompeu Fabra ( www.iula.upf.es ),
