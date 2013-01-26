@@ -60,6 +60,12 @@ Documentation can be generated using rdoc tool under the source code with:
 
   rdoc README lib
 
+==Contributors
+
+- Ben Prew https://github.com/benprew
+- Rory O'Kane
+- Sergio Espeja https://github.com/spejman
+
 
 ==Copying
 
