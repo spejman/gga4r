@@ -49,11 +49,6 @@ General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simp
 	require "rubygems"
 	require "gga4r"
 
-
-==Attention
-
- Please note that Gga4r adds shuffle, shuffle!, each_pair and separate methods to the Array class.
-
 ==Documentation
 
 Documentation can be generated using rdoc tool under the source code with:
