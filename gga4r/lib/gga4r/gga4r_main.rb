@@ -1,7 +1,5 @@
 require "yaml"
-require "logger"
 require "rubygems"
-require "active_support"
 
 class GeneticAlgorithm
   attr_reader :generations, :p_combination, :p_mutation
@@ -39,10 +37,8 @@ class GeneticAlgorithm
   # Returns an array with the best fitted individuals for given
   # generation number ( by default from last generation ).
   def best_fit(num_generation = -1)
-    raise "Generation not generated still num generations = #{num_generations}" if num_generation > num_generations  
-    generation = @generations[num_generation]
-    max_fitness = generation.collect { |chromosome| chromosome.fitness }.max
-    generation.select { |chromosome| chromosome.fitness == max_fitness }
+    raise "Generation not generated still num generations = #{num_generations}" if num_generation > num_generations
+    @generations[num_generation].max { |a,b| a.fitness <=> b.fitness }
   end
   
   # Returns the mean of the fitness for given
