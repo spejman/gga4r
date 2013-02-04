@@ -1,5 +1,4 @@
-require "yaml"
-require "rubygems"
+require 'yaml'
 require 'logger'
 
 class GeneticAlgorithm
