@@ -1,13 +1,6 @@
 require 'rubygems'
-require 'rake'
-require 'rake/clean'
-require 'rake/testtask'
-require 'rake/packagetask'
-require 'rake/gempackagetask'
-require 'rdoc/task'
-require 'rake/contrib/rubyforgepublisher'
-require 'fileutils'
 require 'hoe'
+
 include FileUtils
 
 AUTHOR = "Sergio Espeja"
@@ -20,7 +13,6 @@ HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 
 NAME = "gga4r"
 REV = nil # UNCOMMENT IF REQUIRED: File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
-CLEAN.include ['**/.*.sw?', '*.gem', '.config']
 RDOC_OPTS = ['--quiet', '--title', "gga4r documentation",
     "--opname", "index.html",
     "--line-numbers", 
@@ -43,7 +35,7 @@ hoe = Hoe.spec GEM_NAME do |p|
   p.urls = [HOMEPATH]
   p.rubyforge_name = RUBYFORGE_PROJECT if RUBYFORGE_PROJECT
   p.test_globs = ["test/**/*_test.rb"]
-  p.clean_globs = CLEAN  #An array of file patterns to delete on clean.
+  p.readme_file = 'README.rdoc'
   
   # == Optional
   #p.changes        - A description of the release's latest changes.

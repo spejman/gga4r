@@ -1,8 +1,10 @@
-=README for gga4r
+= gga4r - General Genetic Algorithm for Ruby
 
-==Introduction
+== DESCRIPTION:
 
-General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simple to use:
+General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simple to use
+
+== SYNOPSIS:
 
 	1. Take a class to evolve it and define fitness, recombine and mutate methods.
 			class StringPopulation < Array
@@ -39,7 +41,7 @@ General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simp
 			100.times { |i|  ga.evolve }
 			p ga.best_fit[0]
 
-==Install
+== INSTALL:
 
 1. Execute:
 	gem install gga4r
@@ -48,13 +50,17 @@ General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simp
 	require "rubygems"
 	require "gga4r"
 
-==Documentation
+== DEVELOPERS:
+
+ * Sergio Espeja
+ * Rory O'Kane
+ * Ben Prew
 
 Documentation can be generated using rdoc tool under the source code with:
 
   rdoc README lib
 
-==Copying
+== LICENSE:
 
 This work is developed by Sergio Espeja ( www.upf.edu/pdi/iula/sergio.espeja, sergio.espeja at gmail.com )
 mainly in Institut Universitari de Lingüística Aplicada of Universitat Pompeu Fabra ( www.iula.upf.es ),
