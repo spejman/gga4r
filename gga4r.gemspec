@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "gga4r"
 
-  s.files = Dir.glob("gga4r/**/*")
-  s.require_paths = ["gga4r/lib/"]
+  s.files = Dir.glob("lib/**/*")
+  s.require_paths = ["lib/"]
 
   s.add_dependency 'psych'
   s.add_development_dependency "hoe"
