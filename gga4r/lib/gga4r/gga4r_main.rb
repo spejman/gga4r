@@ -1,5 +1,6 @@
-require 'yaml'
 require 'logger'
+
+VERSION = '0.9.3'
 
 class GeneticAlgorithm
 
