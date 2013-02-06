@@ -1,30 +1,29 @@
 =README for gga4r
 
-
 ==Introduction
 
 General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simple to use:
 
-	1) Take a class to evolve it and define fitness, recombine and mutate methods.
+	1. Take a class to evolve it and define fitness, recombine and mutate methods.
 			class StringPopulation < Array
 			    def fitness
 			      self.select { |pos| pos == 1 }.size.to_f / self.size.to_f
 			    end
-			
+
 			    def recombine(c2)
 			      cross_point = (rand * c2.size).to_i
 			      c1_a, c1_b = self.separate(cross_point)
 			      c2_a, c2_b = c2.separate(cross_point)
 			      [StringPopulation.new(c1_a + c2_b), StringPopulation.new(c2_a + c1_b)]
 			    end
-			
+
 			    def mutate
 			      mutate_point = (rand * self.size).to_i
 			      self[mutate_point] = 1
 			    end
 			end
-	
-	2) Create a GeneticAlgorithm object with the population.
+
+	2. Create a GeneticAlgorithm object with the population.
 			def create_population_with_fit_all_1s(s_long = 10, num = 10)
 			    population = []
 			    num.times  do
@@ -33,19 +32,19 @@ General Genetic Algorithm for Ruby is a Ruby Genetic Algorithm that is very simp
 			    end
 			    population
 			end
-		
+
 			ga = GeneticAlgorithm.new(create_population_with_fit_all_1s)
-	
-	3) Call the evolve method as many times as you want and see the best evolution.
+
+	3. Call the evolve method as many times as you want and see the best evolution.
 			100.times { |i|  ga.evolve }
 			p ga.best_fit[0]
 
 ==Install
 
-1) Execute:
+1. Execute:
 	gem install gga4r
 
-2) Add require in your code headers:
+2. Add require in your code headers:
 	require "rubygems"
 	require "gga4r"
 
@@ -55,7 +54,6 @@ Documentation can be generated using rdoc tool under the source code with:
 
   rdoc README lib
 
-
 ==Copying
 
 This work is developed by Sergio Espeja ( www.upf.edu/pdi/iula/sergio.espeja, sergio.espeja at gmail.com )
@@ -63,6 +61,3 @@ mainly in Institut Universitari de Lingüística Aplicada of Universitat Pompeu 
 and also in bee.com.es ( bee.com.es ).
 
 It is free software, and may be redistributed under GPL license.
-
-
-
