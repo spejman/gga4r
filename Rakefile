@@ -9,7 +9,6 @@ require 'rake/contrib/rubyforgepublisher'
 require 'fileutils'
 require 'hoe'
 include FileUtils
-require File.join(File.dirname(__FILE__), 'lib', 'gga4r', 'version')
 
 AUTHOR = "Sergio Espeja"
 EMAIL = "sergio.espeja@gmail.com"
@@ -21,8 +20,7 @@ HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 
 NAME = "gga4r"
 REV = nil # UNCOMMENT IF REQUIRED: File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
-VERS = ENV['VERSION'] || (Gga4r::VERSION::STRING + (REV ? ".#{REV}" : ""))
-                          CLEAN.include ['**/.*.sw?', '*.gem', '.config']
+CLEAN.include ['**/.*.sw?', '*.gem', '.config']
 RDOC_OPTS = ['--quiet', '--title', "gga4r documentation",
     "--opname", "index.html",
     "--line-numbers", 
