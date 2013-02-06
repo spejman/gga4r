@@ -28,19 +28,15 @@ class GeneticAlgorithm
   # Returns a GeneticAlgorithm object with the generations
   # loaded from given files and with properties prop.
   # Files must contain the chromosomes in YAML format.
-  def self.populate_from_files(a_filenames, prop = {})
-    a_filenames = [a_filenames] if a_filenames.class == String
-
-    loaded_generations = a_filenames.collect { |filename| YAML.load(File.open(filename, "r")) }
-    prop[:extra_generations] = loaded_generations[1..-1] if loaded_generations.size > 1
-    return GeneticAlgorithm.new(loaded_generations[0], prop)
+  def self.populate_from_file(filename, prop = {})
+    GeneticAlgorithm.new(YAML.load(File.open(filename, 'r')), prop)
   end
 
   # Saves into filename and in yaml format the generation that matchs with given
   # generation number ( by default from last generation ).
-  def save_generation(filename, num_generation = -1)
+  def save_population(filename)
     f = File.new(filename, "w")
-    f.write(self.generations[num_generation].to_yaml)
+    f.write(@population.to_yaml)
     f.close
   end
 
