@@ -16,5 +16,6 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("gga4r/**/*")
   s.require_paths = ["gga4r/lib/"]
 
+  s.add_dependency 'psych'
   s.add_development_dependency "hoe"
 end
