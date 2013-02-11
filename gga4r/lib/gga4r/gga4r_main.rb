@@ -24,7 +24,7 @@ class GeneticAlgorithm
     @p_mutation = prop[:p_mutation] || 0.01
     @max_population =  prop[:max_population]
     @logger = prop[:logger] if prop[:logger]
-    @use_threads = prop[:use_threads] if prop[:use_threads]
+    @use_threads = prop[:use_threads] || true
 #    mean_fitness
   end
 
@@ -79,7 +79,11 @@ class GeneticAlgorithm
   # Evolves the actual generation num_steps steps (1 by default).
   def evolve(num_steps = 1)
     num_steps.times do
-      @generations << evaluation_with_threads(@generations[-1])
+      if @use_threads
+      	@generations << evaluation_with_threads(@generations[-1])
+      else
+      	@generations << evaluation(@generations[-1])
+      end
       selection!
       recombination! 
       mutation!
