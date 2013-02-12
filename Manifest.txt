@@ -1,0 +1,7 @@
+Rakefile
+README.rdoc
+Manifest.txt
+lib/gga4r.rb
+test/test_helper.rb
+test/gga4r_test.rb
+examples/ga_fitness_all_1s.rb

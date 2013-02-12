@@ -1,15 +1,7 @@
 require 'rubygems'
-require 'rake'
-require 'rake/clean'
-require 'rake/testtask'
-require 'rake/packagetask'
-require 'rake/gempackagetask'
-require 'rake/rdoctask'
-require 'rake/contrib/rubyforgepublisher'
-require 'fileutils'
 require 'hoe'
+
 include FileUtils
-require File.join(File.dirname(__FILE__), 'lib', 'gga4r', 'version')
 
 AUTHOR = "Sergio Espeja"
 EMAIL = "sergio.espeja@gmail.com"
@@ -21,8 +13,6 @@ HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 
 NAME = "gga4r"
 REV = nil # UNCOMMENT IF REQUIRED: File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
-VERS = ENV['VERSION'] || (Gga4r::VERSION::STRING + (REV ? ".#{REV}" : ""))
-                          CLEAN.include ['**/.*.sw?', '*.gem', '.config']
 RDOC_OPTS = ['--quiet', '--title', "gga4r documentation",
     "--opname", "index.html",
     "--line-numbers", 
@@ -37,15 +27,15 @@ end
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
-hoe = Hoe.new(GEM_NAME, VERS) do |p|
+hoe = Hoe.spec GEM_NAME do |p|
   p.author = AUTHOR 
   p.description = DESCRIPTION
   p.email = EMAIL
   p.summary = DESCRIPTION
-  p.url = HOMEPATH
+  p.urls = [HOMEPATH]
   p.rubyforge_name = RUBYFORGE_PROJECT if RUBYFORGE_PROJECT
   p.test_globs = ["test/**/*_test.rb"]
-  p.clean_globs = CLEAN  #An array of file patterns to delete on clean.
+  p.readme_file = 'README.rdoc'
   
   # == Optional
   #p.changes        - A description of the release's latest changes.

@@ -1,5 +1,4 @@
-#README for gga4r
-
+# gga4r - General Genetic Algorithm for Ruby
 
 ##Introduction
 
@@ -61,10 +60,6 @@ gem install gga4r
 require "rubygems"
 require "gga4r"
 ```
-
-##Attention
-
-Please note that Gga4r adds shuffle, shuffle!, each_pair and separate methods to the Array class.
 
 ##Documentation
 
