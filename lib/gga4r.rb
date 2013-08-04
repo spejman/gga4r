@@ -1,8 +1,7 @@
 require 'logger'
 
-VERSION = '0.9.3'
-
 class GeneticAlgorithm
+  VERSION = '0.9.3'
 
   # Must be initialized with a Array of chromosomes
   # To be a chomosome the object must implement the next methods:
