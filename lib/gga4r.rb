@@ -1,5 +1,6 @@
 require 'logger'
 
+# Modification of gga4r to allow for multi-modal optimization
 class GeneticAlgorithm
   VERSION = '0.9.3'
 
@@ -22,6 +23,11 @@ class GeneticAlgorithm
   # generation number ( by default from last generation ).
   def best_fit
     @population.max_by(&:fitness)
+  end
+
+  # Returns an array with the best fitted n individuals from the population (might include local optima)
+  def best_fitted n
+    @population.sort_by{|c| -c.fitness}.first(n)
   end
 
   # Returns a GeneticAlgorithm object with the generations
@@ -52,7 +58,7 @@ class GeneticAlgorithm
 
   # Selects population to survive and recombine
   def selection(g)
-    @max_population && g.length > @max_population ? g.sort {|a, b| b.fitness <=> a.fitness }[0..(@max_population-1)] : g
+    @max_population && g.length > @max_population ? g.sort_by{|c| -c.fitness}.first(@max_population) : g
   end
 
   # Recombines population
