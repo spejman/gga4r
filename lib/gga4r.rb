@@ -22,6 +22,7 @@ class GeneticAlgorithm
     @population = in_pop
     @generations = []
     @multi_modal = prop[:multi_modal]
+    @share_radius = prop[:share_radius] or 3
   end
 
   # Returns an array with the best fitted individuals for last generation
@@ -54,12 +55,12 @@ class GeneticAlgorithm
   # Evolves the actual generation num_steps steps (1 by default).
   def evolve num_steps = 1
     num_steps.times do |t|
-      @population = selection(@population)
+      new_gen = @population.map { |chromosome| chromosome.dup }
+      @population = selection(new_gen)
       if !@multi_modal
-        new_gen = @population.map { |chromosome| chromosome.dup }
         @population += recombination(new_gen) + mutation(new_gen)
       else
-        @population = deterministic_crowding(@population.dup)
+        @population = deterministic_crowding(@population)
         @population = mutation(@population)
       end
     end
@@ -116,7 +117,7 @@ class GeneticAlgorithm
 
   def derated_fitness(c,g)
 
-    share_count = g.map{|c2| [(1-c.distance(c2)/3),0].max }.sum
+    share_count = g.map{|c2| [(1-c.distance(c2)/@share_radius),0].max }.sum
 
     share_count = Float::EPSILON if share_count==0
 
