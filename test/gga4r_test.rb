@@ -9,13 +9,13 @@ class IndividualStub < Array
   end
 
   def recombine(a)
-    self * 2
+    [self * 2, self * 2]
   end
 
   def self.create_random_population(num_population = 30)
     population = []
     num_population.times do
-      population << IndividualStub.new
+      population << IndividualStub.new([1,2,3])
     end
     return population
   end

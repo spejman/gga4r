@@ -66,7 +66,7 @@ class GeneticAlgorithm
       @logger.debug "Recombining" if @logger
       new_children << chromosome1.recombine(chromosome2)
     end
-    new_generation + new_children
+    new_generation + new_children.flatten(1)
   end
 
   # Mutates population
