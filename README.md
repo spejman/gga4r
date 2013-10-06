@@ -16,7 +16,7 @@ class StringPopulation < Array
     cross_point = (rand * c2.size).to_i
     c1_a, c1_b = self.separate(cross_point)
     c2_a, c2_b = c2.separate(cross_point)
-    [StringPopulation.new(c1_a + c2_b), StringPopulation.new(c2_a + c1_b)]
+    StringPopulation.new(c1_a + c2_b)
   end
 
   def mutate
