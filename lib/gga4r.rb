@@ -101,17 +101,25 @@ class GeneticAlgorithm
         c1, c2 = p1.recombine(p2)
 
         if p1.distance(c1) + p2.distance(c2) <= p1.distance(c2) + p2.distance(c1)
-          new_gen << [p1,c1].max_by(&:fitness)
-          new_gen << [p2,c2].max_by(&:fitness)
+          new_gen << [p1,c1].max_by{|c| derated_fitness(c)}
+          new_gen << [p2,c2].max_by{|c| derated_fitness(c)}
         else 
-          new_gen << [p1,c2].max_by(&:fitness)
-          new_gen << [p2,c1].max_by(&:fitness)
+          new_gen << [p1,c2].max_by{|c| derated_fitness(c)}
+          new_gen << [p2,c1].max_by{|c| derated_fitness(c)}
         end
       else
         new_gen << p1
       end
     end
     new_gen
+  end
+
+  def derated_fitness(c)
+
+    share_count = @population.map{|c2| [(1-c.distance(c2)/3),0].max }.sum
+
+    c.fitness/share_count
+
   end
 
   # Mutates population
