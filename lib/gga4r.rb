@@ -4,6 +4,7 @@ require 'logger'
 class GeneticAlgorithm
   VERSION = '0.9.3'
 
+  attr_accessor :population
   # Must be initialized with a Array of chromosomes
   # To be a chomosome the object must implement the next methods:
   #  - fitness
