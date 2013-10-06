@@ -9,7 +9,7 @@ class IndividualStub < Array
   end
 
   def recombine(a)
-    [self * 2, self * 2]
+    self * 2
   end
 
   def self.create_random_population(num_population = 30)
@@ -61,7 +61,9 @@ class Gga4rTest < Test::Unit::TestCase
   end
 
   def test_multiple_recombination
-    ga = GeneticAlgorithm.new(StringPopulation.create_population)
+    opts = {multi_recombination: true}
+    ga = GeneticAlgorithm.new(StringPopulation.create_population, opts)
+    assert ga.instance_variable_get(:@multi_recombination)
     4.times { |i| ga.evolve }
     p ga.best_fit[0]
   end
