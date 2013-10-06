@@ -59,7 +59,7 @@ class GeneticAlgorithm
         new_gen = @population.map { |chromosome| chromosome.dup }
         @population += recombination(new_gen) + mutation(new_gen)
       else
-        @population = deterministic_crowding(@population)
+        @population = deterministic_crowding(@population.dup)
         @population = mutation(@population)
       end
     end
@@ -87,8 +87,9 @@ class GeneticAlgorithm
   end
 
   def deterministic_crowding(g)
-    group1 = g.sample(g.length/2)
-    group2 = (g - group1).shuffle
+    groups = g.shuffle
+    group1 = groups.first(g.length/2)
+    group2 = groups[g.length/2..-1]
 
     new_gen = []
 
