@@ -94,16 +94,20 @@ class GeneticAlgorithm
     group1.each_with_index do |p1,i|
       p2 = group2[i]
 
-      c1, c2 = p1.recombine(p2)
+      if p2
 
-      if p1.distance(c1) + p2.distance(c2) <= p1.distance(c2) + p2.distance(c1)
-        new_gen << [p1,c1].max_by(&:fitness)
-        new_gen << [p2,c2].max_by(&:fitness)
-      else 
-        new_gen << [p1,c2].max_by(&:fitness)
-        new_gen << [p2,c1].max_by(&:fitness)
+        c1, c2 = p1.recombine(p2)
+
+        if p1.distance(c1) + p2.distance(c2) <= p1.distance(c2) + p2.distance(c1)
+          new_gen << [p1,c1].max_by(&:fitness)
+          new_gen << [p2,c2].max_by(&:fitness)
+        else 
+          new_gen << [p1,c2].max_by(&:fitness)
+          new_gen << [p2,c1].max_by(&:fitness)
+        end
+      else
+        new_gen << p1
       end
-
     end
     new_gen
   end
