@@ -64,7 +64,10 @@ class Gga4rTest < Test::Unit::TestCase
     opts = {multi_recombination: true}
     ga = GeneticAlgorithm.new(StringPopulation.create_population, opts)
     assert ga.instance_variable_get(:@multi_recombination)
-    4.times { |i| ga.evolve }
-    p ga.best_fit[0]
+    4.times do |i|
+      assert_nothing_raised do
+        ga.evolve
+      end
+    end
   end
 end
