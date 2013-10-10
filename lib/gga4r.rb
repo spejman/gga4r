@@ -35,6 +35,12 @@ class GeneticAlgorithm
     @population.uniq.sort_by{|c| -c.fitness}.first(n)
   end
 
+   # Returns an array with the best fitted n individuals from the population (might include local optima)
+   # Uses a distance-derated fitness metric
+  def best_fitted_derated n
+    @population.uniq.sort_by{|c| -(derated_fitness(c,@population))}.first(n)
+  end
+
   # Returns a GeneticAlgorithm object with the generations
   # loaded from given files and with properties prop.
   # Files must contain the chromosomes in YAML format.
