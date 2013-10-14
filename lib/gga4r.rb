@@ -11,10 +11,13 @@ class GeneticAlgorithm
   #  Accepts the next properties:
   #   - max_population: maximum number of individuals that are allowed to form a generation.
   #   - logger: logger to write messages if given.
+  #   - multi_recombination: set to true if the result of a chromosome's #recombination method
+  #     returns an array. Default to false
   def initialize(in_pop, prop = {})
     @max_population =  prop[:max_population]
     @logger = prop[:logger] || Logger.new('/dev/null')
     @population = in_pop
+    @multi_recombination = prop[:multi_recombination] || false
     @generations = []
   end
 
@@ -66,6 +69,7 @@ class GeneticAlgorithm
       @logger.debug "Recombining" if @logger
       new_children << chromosome1.recombine(chromosome2)
     end
+    new_children.flatten!(1) if @multi_recombination
     new_generation + new_children
   end
 
