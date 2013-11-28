@@ -1,10 +1,8 @@
 require 'logger'
 
-# Modification of gga4r to allow for multi-modal optimization with deterministic crowding
 class GeneticAlgorithm
   VERSION = '0.9.3'
 
-  attr_accessor :population
   # Must be initialized with a Array of chromosomes
   # To be a chomosome the object must implement the next methods:
   #  - fitness
@@ -14,14 +12,17 @@ class GeneticAlgorithm
   #  Accepts the next properties:
   #   - max_population: maximum number of individuals that are allowed to form a generation.
   #   - logger: logger to write messages if given.
-  #
-  # This GA will always mutate and recombine. Probabilities should be defined and evaluated in the chromosome class.
+  #   - multi_recombination: set to true if the result of a chromosome's #recombination method
+  #     returns an array. Default to false
+  #   - multi_modal: set to true to use a multi-modal algorithm using deterministic crowding and a distance-derated fitness.
+  #   - share_radius: in multi-modal optimization, determines the niche radius for derated fitness calculation. 
   def initialize(in_pop, prop = {})
     @max_population =  prop[:max_population]
     @logger = prop[:logger] || Logger.new('/dev/null')
     @population = in_pop
+    @multi_recombination = prop[:multi_recombination] || false
     @generations = []
-    @multi_modal = prop[:multi_modal]
+    @multi_modal = prop[:multi_modal] || false
     @share_radius = prop[:share_radius] or 3
   end
 
@@ -61,8 +62,8 @@ class GeneticAlgorithm
   # Evolves the actual generation num_steps steps (1 by default).
   def evolve num_steps = 1
     num_steps.times do |t|
+      @population = selection(@population)
       new_gen = @population.map { |chromosome| chromosome.dup }
-      @population = selection(new_gen)
       if !@multi_modal
         @population += recombination(new_gen) + mutation(new_gen)
       else
@@ -90,6 +91,7 @@ class GeneticAlgorithm
       @logger.debug "Recombining" if @logger
       new_children << chromosome1.recombine(chromosome2)
     end
+    new_children.flatten!(1) if @multi_recombination
     new_generation + new_children
   end
 
@@ -122,13 +124,9 @@ class GeneticAlgorithm
   end
 
   def derated_fitness(c,g)
-
     share_count = g.map{|c2| [(1-c.distance(c2)/@share_radius),0].max }.sum
-
     share_count = Float::EPSILON if share_count==0
-
     c.fitness/share_count
-
   end
 
   # Mutates population
