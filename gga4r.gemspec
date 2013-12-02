@@ -16,6 +16,5 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("lib/**/*")
   s.require_paths = ["lib/"]
 
-  s.add_dependency 'psych'
   s.add_development_dependency "hoe"
 end
