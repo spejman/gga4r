@@ -70,6 +70,7 @@ rdoc README lib
 
 ##Contributors
 
+- Pablo Carranza Vélez https://github.com/pcarranzav
 - Ben Prew https://github.com/benprew
 - Rory O'Kane
 - Sergio Espeja https://github.com/spejman
