@@ -1,5 +1,5 @@
 Rakefile
-README.rdoc
+README.md
 Manifest.txt
 lib/gga4r.rb
 test/test_helper.rb

@@ -15,28 +15,28 @@ NAME = "gga4r"
 REV = nil # UNCOMMENT IF REQUIRED: File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
 RDOC_OPTS = ['--quiet', '--title', "gga4r documentation",
     "--opname", "index.html",
-    "--line-numbers", 
+    "--line-numbers",
     "--main", "README",
     "--inline-source"]
 
 class Hoe
-  def extra_deps 
-    @extra_deps.reject { |x| Array(x).first == 'hoe' } 
-  end 
+  def extra_deps
+    @extra_deps.reject { |x| Array(x).first == 'hoe' }
+  end
 end
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 hoe = Hoe.spec GEM_NAME do |p|
-  p.author = AUTHOR 
+  p.author = AUTHOR
   p.description = DESCRIPTION
   p.email = EMAIL
   p.summary = DESCRIPTION
   p.urls = [HOMEPATH]
   p.rubyforge_name = RUBYFORGE_PROJECT if RUBYFORGE_PROJECT
   p.test_globs = ["test/**/*_test.rb"]
-  p.readme_file = 'README.rdoc'
-  
+  p.readme_file = 'README.md'
+
   # == Optional
   #p.changes        - A description of the release's latest changes.
   #p.extra_deps     - An array of rubygem dependencies.
